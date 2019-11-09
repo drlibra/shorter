@@ -1,0 +1,6 @@
+{
+    "require": {
+        "php": ">=7.1.0",
+        "cebe/assetfree-yii2": "^2.0"
+    }
+}
