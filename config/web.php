@@ -6,6 +6,11 @@ $config = [
     'id' => 'shorter',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules' => [
+        'api' => [
+            'class' => app\modules\api\Module::class,
+        ],
+    ],
     'components' => [
         'request' => [
             'enableCsrfValidation' => false,
@@ -33,7 +38,13 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [],
+            'rules' => [
+                [
+                    'class' => \yii\rest\UrlRule::class,
+                    'controller' => 'api/url',
+                    'pluralize' => false,
+                ],
+            ],
         ],
     ],
 ];
