@@ -29,7 +29,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return 'Hello';
+        $model = new Url();
+
+        if ($model->load(\Yii::$app->request->post(), '') && $model->validate()) {
+            $model->save(false);
+            \Yii::$app->session->addFlash('shortUrl', $model->getShortUrl());
+            return $this->refresh();
+        }
+
+        return $this->render('form', [
+            'model' => $model,
+        ]);
     }
 
     /**
