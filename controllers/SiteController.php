@@ -2,13 +2,11 @@
 
 namespace app\controllers;
 
-use Yii;
-use yii\filters\AccessControl;
+use app\components\ShortUrlConverter;
+use app\models\Url;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
-use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
 class SiteController extends Controller
 {
@@ -32,5 +30,23 @@ class SiteController extends Controller
     public function actionIndex()
     {
         return 'Hello';
+    }
+
+    /**
+     * Redirects from given short URL to stored long URL.
+     *
+     * @param string $shortUrl Short URL
+     * @return Response
+     */
+    public function actionShortUrl(string $shortUrl)
+    {
+        $converter = new ShortUrlConverter();
+        $id = $converter->toID($shortUrl);
+        $model = Url::findOne($id);
+        if ($model === null) {
+            throw new NotFoundHttpException();
+        }
+
+        return $this->redirect($model->long_url);
     }
 }

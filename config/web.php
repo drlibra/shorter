@@ -44,6 +44,7 @@ $config = [
                     'controller' => 'api/url',
                     'pluralize' => false,
                 ],
+                ['pattern' => '/<shortUrl:\w+>/', 'route' => 'site/short-url'],
             ],
         ],
     ],

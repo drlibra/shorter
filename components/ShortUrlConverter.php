@@ -44,4 +44,24 @@ class ShortUrlConverter extends BaseObject
 
         return $this->symbols[$remainder] . $shortUrl;
     }
+
+    /**
+     * Translates given short URL to identifier.
+     *
+     * @param string $shortUrl Short URL
+     * @return int
+     */
+    public function toID(string $shortUrl): int
+    {
+        $shortUrlSymbols = array_reverse(str_split($shortUrl));
+
+        $id = 0;
+        $basis = count($this->symbols);
+        $baseSymbols = array_flip($this->symbols);
+        foreach ($shortUrlSymbols as $symbolPosition => $shortUrlSymbol) {
+            $id += $basis ** $symbolPosition * $baseSymbols[$shortUrlSymbol];
+        }
+
+        return $id;
+    }
 }

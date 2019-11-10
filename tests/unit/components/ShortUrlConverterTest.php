@@ -70,4 +70,32 @@ class ShortUrlConverterTest extends Unit
             ],
         ];
     }
+
+    /**
+     * Tests method toID() with given parameters.
+     *
+     * @dataProvider provideToIDTestData
+     * @param int $expected Expected result
+     * @param string $shortUrl Short URL
+     */
+    public function testToID(int $expected, string $shortUrl): void
+    {
+        $converter = new ShortUrlConverter();
+        $this->assertEquals($expected, $converter->toID($shortUrl));
+    }
+
+    /**
+     * Provides test data for testing method toID().
+     *
+     * @return array
+     */
+    public function provideToIDTestData(): array
+    {
+        return array_map(
+            function (array $elem): array {
+                return [$elem[1], $elem[0]];
+            },
+            $this->provideToShortUrlTestData()
+        );
+    }
 }
