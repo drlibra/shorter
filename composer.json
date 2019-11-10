@@ -2,5 +2,9 @@
     "require": {
         "php": ">=7.1.0",
         "cebe/assetfree-yii2": "^2.0"
+    },
+    "require-dev": {
+        "codeception/base": "^3.1",
+        "guzzlehttp/guzzle": ">=6.3.0 <7.0"
     }
 }
